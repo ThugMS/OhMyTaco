@@ -7,37 +7,27 @@ using UnityEngine.SceneManagement;
 
 public class Fishing : MonoBehaviour
 {
-    GameManager gameManager;
-
-    Vector2 rightPosition; // 게이지 우측 끝 위치
-    Vector2 leftPosition;  // 게이지 좌측 끝 위치
-    Vector2 endPosition;   // 막대 목표 위치
-
-    int chanceIdx; // 도전 기회 인덱스 번호
-
-    float ArrowMoveSpeed = 20f;  // 게이지 왕복 스피드, 편도 0.5초
-    float GageBarLength = 10f; // 게이지의 가로 길이
-
-    private void Start()
+    #region PublicMethod
+    void Start()
     {
         gameManager = Camera.main.GetComponent<GameManager>();
 
         leftPosition = transform.position;
         rightPosition = leftPosition + Vector2.right * GageBarLength;
 
-        endPosition = rightPosition;
+        desPosition = rightPosition;
 
         chanceIdx = 0;
     }
 
-    private void FixedUpdate()
+    void FixedUpdate() // Update로 변경될 가능성 있음
     {
         if ((Vector2)transform.position == leftPosition)
-            endPosition = rightPosition;
+            desPosition = rightPosition;
         else if ((Vector2)transform.position == rightPosition)
-            endPosition = leftPosition;
+            desPosition = leftPosition;
 
-        transform.position = Vector2.MoveTowards(transform.position, endPosition, Time.deltaTime * ArrowMoveSpeed); // 이동
+        transform.position = Vector2.MoveTowards(transform.position, desPosition, Time.deltaTime * ArrowMoveSpeed); // 이동
     }
 
     public void PushFishingButton() // 낚기 버튼 클릭
@@ -49,4 +39,24 @@ public class Fishing : MonoBehaviour
 
         gameManager.SetPoint(distanceinterval, chanceIdx++);
     }
+    #endregion
+
+    #region PublicVariable
+    #endregion
+
+    #region PrivateVariable
+    GameManager gameManager;
+
+    private Vector2 rightPosition; // 게이지 우측 끝 위치
+    private Vector2 leftPosition;  // 게이지 좌측 끝 위치
+    private Vector2 desPosition;   // 막대 목표 위치
+
+    private int chanceIdx; // 도전 기회 인덱스 번호
+
+    private float ArrowMoveSpeed = 20f;  // 막대 왕복 스피드, 편도 0.5초
+    private float GageBarLength = 10f;   // 게이지의 가로 길이
+    #endregion
+
+    #region PrivateMethod
+    #endregion
 }

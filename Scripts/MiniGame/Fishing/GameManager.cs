@@ -10,19 +10,13 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
-    FishingDataBus _fishDataBus;   // Scene간 데이터 이동을 원활히 하기 위한 스크립트
-    [SerializeField]
-    TextMeshProUGUI[] _scoreTextMeshPro; // 점수를 기록하는 텍스트
-
-    int totalScore; // 총 얻은 점수
-
-    private void Start()
+    #region PublicMethod
+    void Start()
     {
         totalScore = 0;
     }
 
-    public void SetPoint(float _distanceinterval, int _chanceIdx)
+    public void SetPoint(float _distanceinterval, int _chanceIdx) // 버튼 클릭시 에임 위치에 따른 점수 산출
     {
         /*
          * 위치 차이에 따른 점수 목록(임의 지정)
@@ -64,13 +58,31 @@ public class GameManager : MonoBehaviour
 
         totalScore += Int32.Parse(_scoreTextMeshPro[_chanceIdx].text);
 
-        if(_chanceIdx == 2)
+        if (_chanceIdx == 2)
             FinishFishing(); // 다 했으면 종료
     }
+
     public void FinishFishing() // 점수 등록 후 Scene변경
     {
-        _fishDataBus.SetScore(totalScore); 
+        _fishDataBus.SetScore(totalScore);
 
         SceneManager.LoadScene("SampleStart");
     }
+    #endregion
+
+    #region PublicVariable
+    #endregion
+
+    #region PrivateVariable
+    [SerializeField]
+    private FishingDataBus _fishDataBus;   // Scene간 데이터 이동을 원활히 하기 위한 스크립트(임시)
+
+    [SerializeField]
+    private TextMeshProUGUI[] _scoreTextMeshPro; // 점수를 기록하는 텍스트
+
+    private int totalScore; // 총 얻은 점수
+    #endregion
+
+    #region PrivateMethod
+    #endregion
 }
