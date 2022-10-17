@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class FishingDataBus : MonoBehaviour
 {
-    [SerializeField]
-    int totalScore;
-
+    #region PublicMethod
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -16,4 +14,16 @@ public class FishingDataBus : MonoBehaviour
     {
         totalScore = _score;
     }
+    #endregion
+
+    #region PublicVariable
+    #endregion
+
+    #region PrivateVariable
+    [SerializeField]
+    private int totalScore;
+    #endregion
+
+    #region PrivateMethod
+    #endregion
 }
