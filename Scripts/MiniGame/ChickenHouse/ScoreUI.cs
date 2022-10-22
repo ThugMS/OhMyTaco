@@ -26,19 +26,7 @@ public class ScoreUI : MonoBehaviour
     #endregion
 
     #region PublicVariable
-    public int score
-    {
-        get { return score; }
-        set
-        {
-            score = value;
-            if (score < 0)
-            {
-                score = 0;
-                return;
-            }
-        }
-    }
+    public int score { get; set; }
     public Image scoreBackground { get { return m_scoreBackground; } }
     public TextMeshProUGUI scoreText { get { return m_scoreText; } }
     #endregion

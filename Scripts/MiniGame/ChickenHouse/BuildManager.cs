@@ -14,26 +14,15 @@ public class BuildManager : MonoBehaviour
     void Update()
     {
         if (m_baseUI.leftButton.isButtonDown)
-        {
-            isMoving = true;
             m_target.GoLeft();
-        }
-        else
-            isMoving = false;
 
         if (m_baseUI.rightButton.isButtonDown)
-        {
-            isMoving = true;
             m_target.GoRight();
-        }
-        else
-            isMoving = false;
     }
     #endregion
 
     #region PublicVariable
     public static BuildManager instance = null;
-    public bool isMoving { get; private set; } = false;
     #endregion
 
     #region PrivateVariable

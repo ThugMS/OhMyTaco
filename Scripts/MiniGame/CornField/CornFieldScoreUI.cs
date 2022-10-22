@@ -20,6 +20,12 @@ public class CornFieldScoreUI : MonoBehaviour
             ScoreIncrease();   
         }
     }
+
+    public void ScoreIncrease()
+    {
+        m_score += 100;
+        SetText();
+    }
     #endregion
 
     #region PublicVariable
@@ -35,12 +41,6 @@ public class CornFieldScoreUI : MonoBehaviour
     private void SetText()
     {
         m_text.text = "Score : " + m_score.ToString();
-    }
-
-    private void ScoreIncrease()
-    {
-        m_score += 100;
-        SetText();
     }
     #endregion
 }

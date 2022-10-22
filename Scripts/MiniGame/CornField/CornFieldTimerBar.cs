@@ -9,12 +9,14 @@ public class CornFieldTimerBar : MonoBehaviour
     void Start()
     {
         m_LimitTime = 60f;
+        m_RemainTime = m_LimitTime;
         TimerBarInitSetting();
     }
 
     void FixedUpdate()
     {
-        m_timerBar.value -= Time.fixedDeltaTime;
+        m_RemainTime -= Time.deltaTime;
+        m_timerBar.fillAmount = m_RemainTime / m_LimitTime;
     }
     #endregion
 
@@ -22,17 +24,16 @@ public class CornFieldTimerBar : MonoBehaviour
     #endregion
 
     #region PrivateVariable
-    private Slider m_timerBar;
+    private Image m_timerBar;
     private float m_LimitTime = 0f;
+    private float m_RemainTime = 0f;
     #endregion
 
     #region PrivateMethod
     private void TimerBarInitSetting()
     {
-        m_timerBar = GetComponent<Slider>();
-        m_timerBar.maxValue = m_LimitTime;
-        m_timerBar.minValue = 0.0f;
-        m_timerBar.value = m_LimitTime;
+        m_timerBar = GetComponent<Image>();
+        m_timerBar.fillAmount = 1.0f;
     }
     #endregion
 }
