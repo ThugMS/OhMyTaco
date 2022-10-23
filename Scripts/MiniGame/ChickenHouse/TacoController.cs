@@ -5,16 +5,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(CircleCollider2D))]
 public class TacoController : MonoBehaviour
 {
     #region PublicMethod
     void Awake()
     {
         GetComponents();
-    }
-
-    void OnEnable()
-    {
         SetDefaults();
     }
 
@@ -46,12 +43,14 @@ public class TacoController : MonoBehaviour
     float m_maxSpeed;
 
     Rigidbody2D m_rigidbody2D;
+    CircleCollider2D m_circleCollider2D;
     #endregion
 
     #region PrivateMethod
     void GetComponents()
     {
         m_rigidbody2D = GetComponent<Rigidbody2D>();
+        m_circleCollider2D = GetComponent<CircleCollider2D>();
     }
 
     void SetDefaults()
@@ -59,6 +58,8 @@ public class TacoController : MonoBehaviour
         if (m_speed > m_maxSpeed)
             m_speed = m_maxSpeed;
         transform.position = m_initPosition;
+        m_circleCollider2D.isTrigger = true;
+        tag = "Player";
     }
     #endregion
 }

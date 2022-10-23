@@ -7,11 +7,6 @@ using UnityEngine.UI;
 public class ScoreUI : MonoBehaviour
 {
     #region PublicMethod
-    void Awake()
-    {
-
-    }
-
     void OnEnable()
     {
         SetDefaults();
