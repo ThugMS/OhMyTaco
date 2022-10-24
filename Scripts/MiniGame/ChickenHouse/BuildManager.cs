@@ -8,33 +8,19 @@ public class BuildManager : MonoBehaviour
     #region PublicMethod
     void Awake()
     {
-        instance = this;
-
         SetDefaults();
     }
 
     void Start()
     {
+        SoundManager.instance.PlayBgm(SoundManager.Bgm.MAIN);
+
         StartCoroutine(LayEggs());
     }
 
     void Update()
     {
-        if (m_targetTr.position.x < m_screenLeftSide.x)
-            m_targetTr.position = m_screenLeftSide;
-        else
-        {
-            if (m_baseUI.leftButton.isButtonDown)
-                m_target.GoLeft();
-        }
-
-        if (m_targetTr.position.x > m_screenRightSide.x)
-            m_targetTr.position = m_screenRightSide;
-        else
-        {
-            if (m_baseUI.rightButton.isButtonDown)
-                m_target.GoRight();
-        }
+        TacoMove();
     }
     #endregion
 
@@ -78,7 +64,27 @@ public class BuildManager : MonoBehaviour
     #region PrivateMethod
     void SetDefaults()
     {
+        instance = this;
         m_targetTr = m_target.transform;
+    }
+
+    void TacoMove()
+    {
+        if (m_targetTr.position.x < m_screenLeftSide.x)
+            m_targetTr.position = m_screenLeftSide;
+        else
+        {
+            if (m_baseUI.leftButton.isButtonDown)
+                m_target.GoLeft();
+        }
+
+        if (m_targetTr.position.x > m_screenRightSide.x)
+            m_targetTr.position = m_screenRightSide;
+        else
+        {
+            if (m_baseUI.rightButton.isButtonDown)
+                m_target.GoRight();
+        }
     }
 
     IEnumerator LayEggs()
