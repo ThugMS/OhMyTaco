@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(CircleCollider2D))]
-public class EggController : MonoBehaviour
+public class PoopController : MonoBehaviour
 {
     #region PublicMethod
     void Awake()
@@ -15,16 +13,18 @@ public class EggController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag(BASKET_TAG))
+        if (collision.CompareTag(PLAYER_TAG) || collision.CompareTag(BASKET_TAG))
         {
-            EggCatchManager.instance.m_objectPool.ReturnEgg(gameObject);
-            EggCatchManager.instance.scoreUI.AddScore(1);
+            m_objectPool.ReturnPoop(gameObject);
+
+            // 라이프 감소
+            EggCatchManager.instance.LifeDecrease();
         }
         else if (collision.CompareTag(FLOOR_TAG))
         {
             // 바닥 충돌 애니메이션 추가
 
-            EggCatchManager.instance.m_objectPool.ReturnEgg(gameObject);
+            m_objectPool.ReturnPoop(gameObject);
         }
     }
     #endregion
@@ -36,7 +36,10 @@ public class EggController : MonoBehaviour
     Rigidbody2D m_rigidbody2D;
     CircleCollider2D m_circleCollider2D;
 
+    EggObjectPool m_objectPool;
+
     const string BASKET_TAG = "Basket";
+    const string PLAYER_TAG = "Player";
     const string FLOOR_TAG = "Floor";
     #endregion
 
@@ -50,6 +53,8 @@ public class EggController : MonoBehaviour
     void SetDefaults()
     {
         m_circleCollider2D.isTrigger = true;
+
+        m_objectPool = EggCatchManager.instance.m_objectPool;
     }
     #endregion
 }

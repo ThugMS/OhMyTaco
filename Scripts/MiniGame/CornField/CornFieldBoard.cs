@@ -1,27 +1,28 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class FishingDataBus : MonoBehaviour
+public class CornFieldBoard : MonoBehaviour
 {
     #region PublicMethod
-    private void Awake()
+    public void UseBoard()
     {
-        DontDestroyOnLoad(gameObject);
+        isUsing = true;
     }
 
-    public void SetScore(int _score) // 점수를 총 정리해서 저장
+    public void ReturnBoard()
     {
-        totalScore = _score;
+        isUsing = false;
     }
     #endregion
 
     #region PublicVariable
+    public bool isUsing { get; private set; } = false;
     #endregion
 
     #region PrivateVariable
-    [SerializeField]
-    private int totalScore;
     #endregion
 
     #region PrivateMethod

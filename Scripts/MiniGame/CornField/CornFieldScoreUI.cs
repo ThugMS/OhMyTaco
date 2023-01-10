@@ -7,23 +7,20 @@ using TMPro;
 public class CornFieldScoreUI : MonoBehaviour
 {
     #region PublicMethod
-    void Start()
+    void Awake()
     {
         m_text = GetComponent<TextMeshProUGUI>();
-        SetText();
     }
 
-    void Update()
+    public void SetDefaults()
     {
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            ScoreIncrease();   
-        }
+        m_score = 0;
+        ScoreIncrease(0);
     }
 
-    public void ScoreIncrease()
+    public void ScoreIncrease(int _score)
     {
-        m_score += 100;
+        m_score += _score;
         SetText();
     }
     #endregion
@@ -33,10 +30,10 @@ public class CornFieldScoreUI : MonoBehaviour
     #endregion
 
     #region Private Variable
-    private TextMeshProUGUI m_text;
-    private int m_score = 0;
+    TextMeshProUGUI m_text;
+    int m_score = 0;
     #endregion
-
+    
     #region PrivateMethod
     private void SetText()
     {

@@ -6,17 +6,26 @@ using UnityEngine.UI;
 public class CornFieldTimerBar : MonoBehaviour
 {
     #region PublicMethod
-    void Start()
+    void Awake()
     {
-        m_LimitTime = 60f;
-        m_RemainTime = m_LimitTime;
-        TimerBarInitSetting();
+        m_timerBar = GetComponent<Image>();
+    }
+    public void SetDefaults()
+    {
+        m_RemainTime = LIMIT_TIME;
+        m_timerBar.fillAmount = 1.0f;
     }
 
     void FixedUpdate()
     {
-        m_RemainTime -= Time.deltaTime;
-        m_timerBar.fillAmount = m_RemainTime / m_LimitTime;
+        if (CornFieldManager.instance.m_isPlaying)
+        {
+            m_RemainTime -= Time.deltaTime;
+            m_timerBar.fillAmount = m_RemainTime / LIMIT_TIME;
+
+            if (m_RemainTime <= 0)
+                CornFieldManager.instance.TimeOver();
+        }
     }
     #endregion
 
@@ -24,16 +33,13 @@ public class CornFieldTimerBar : MonoBehaviour
     #endregion
 
     #region PrivateVariable
-    private Image m_timerBar;
-    private float m_LimitTime = 0f;
-    private float m_RemainTime = 0f;
+    bool m_isGameStart;
+    Image m_timerBar;
+    float m_RemainTime = 0f;
+
+    const float LIMIT_TIME = 60f;
     #endregion
 
     #region PrivateMethod
-    private void TimerBarInitSetting()
-    {
-        m_timerBar = GetComponent<Image>();
-        m_timerBar.fillAmount = 1.0f;
-    }
     #endregion
 }

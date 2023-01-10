@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScoreUI : MonoBehaviour
+public class EggCatchScoreUI : MonoBehaviour
 {
     #region PublicMethod
     void OnEnable()
@@ -27,10 +27,8 @@ public class ScoreUI : MonoBehaviour
     #endregion
 
     #region PrivateVariable
-    [SerializeField]
-    Image m_scoreBackground;
-    [SerializeField]
-    TextMeshProUGUI m_scoreText;
+    [SerializeField] Image m_scoreBackground;
+    [SerializeField] TextMeshProUGUI m_scoreText;
     #endregion
 
     #region PrivateMethod

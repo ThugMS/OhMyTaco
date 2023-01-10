@@ -10,7 +10,7 @@ public class SerialImagesHandler : MonoBehaviour
     #region PublicMethod
     void Awake()
     {
-        SetImages();
+        //SetImages();
     }
     #endregion
 
@@ -22,12 +22,9 @@ public class SerialImagesHandler : MonoBehaviour
 
     #region PrivateVariable
     [Header("UI Variables")]
-    [SerializeField]
-    Image[] m_images;
-    [SerializeField]
-    Vector2 m_initialPosition;
-    [SerializeField]
-    Vector2 m_imageInterval;
+    [SerializeField] Image[] m_images;
+    [SerializeField] Vector2 m_initialPosition;
+    [SerializeField] Vector2 m_imageInterval;
     #endregion
 
     #region PrivateMethod
